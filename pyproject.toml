@@ -2,7 +2,7 @@
 [tool.briefcase]
 project_name = "Depurador de Camara Trampa"
 bundle = "dev.antruc"
-version = "0.0.3"
+version = "0.0.4"
 url = "https://github.com/antruc/depuradordecamaratrampa"
 license.file = "LICENSE"
 author = "Antruc"
@@ -21,9 +21,9 @@ test_sources = [
 ]
 
 requires = [
-    "ultralytics",
-    "onnx",
-    "onnxruntime",
+    "ultralytics~=8.4",
+    "onnx~=1.19",
+    "onnxruntime~=1.20",
 ]
 test_requires = [
     "pytest",
@@ -165,32 +165,4 @@ flatpak_sdk = "org.gnome.Sdk"
 [tool.briefcase.app.depuradordecamaratrampa.windows]
 requires = [
     "toga-winforms~=0.5.0",
-]
-
-# Mobile deployments
-[tool.briefcase.app.depuradordecamaratrampa.iOS]
-requires = [
-    "toga-iOS~=0.5.0",
-    "std-nslog~=1.0.3",
-]
-
-[tool.briefcase.app.depuradordecamaratrampa.android]
-requires = [
-    "toga-android~=0.5.0",
-]
-
-base_theme = "Theme.MaterialComponents.Light.DarkActionBar"
-
-build_gradle_dependencies = [
-    "com.google.android.material:material:1.13.0",
-    # Needed for DetailedList
-    # "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0",
-    # Needed for MapView
-    # "org.osmdroid:osmdroid-android:6.1.20",
-]
-
-# Web deployments
-[tool.briefcase.app.depuradordecamaratrampa.web]
-requires = [
-    "toga-web~=0.5.0",
 ]
