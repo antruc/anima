@@ -3,7 +3,8 @@ project_name = "Anima"
 bundle = "dev.antruc"
 version = "1.0.0"
 url = "https://github.com/antruc/anima"
-license.file = "LICENSE"
+license = "GPL-3.0+"
+license-files = ["LICENSE"]
 author = "Antruc"
 author_email = "admin@antruc.dev"
 
