@@ -1,4 +1,4 @@
-# Depurador de Camara Trampa Release Notes
+# Anima Release Notes
 
 ## 0.0.1 (04 Feb 2025)
 
@@ -17,3 +17,17 @@
 
 * Improved UI and logic
 * Added test
+
+## 1.0.0 (11 Nov 2026)
+
+* Renamed the app from Depurador de Camara Trampa to Anima
+* Replaced Ultralytics YOLO with MegaDetector v6 on ONNX Runtime and OpenCV: smaller installer, no torch
+* Detects animals and people trained on camera trap images; vehicles are ignored
+* Faster videos: checked at one frame per second, stopping at the first detection
+* Added drag and drop of the input folder
+* Added English and Spanish interface, following the system language
+* Skips corrupt and unsupported files instead of failing
+* Rejects using the same folder as input and output
+* Dropped macOS support: Windows and Linux only
+* Never overwrites a file in the output folder: a taken name gets a numbered suffix
+* Rewrote the README

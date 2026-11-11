@@ -1,168 +1,111 @@
-# This project was generated with 0.3.21 using template: https://github.com/beeware/briefcase-template@v0.3.21
 [tool.briefcase]
-project_name = "Depurador de Camara Trampa"
+project_name = "Anima"
 bundle = "dev.antruc"
-version = "0.0.4"
-url = "https://github.com/antruc/depuradordecamaratrampa"
+version = "1.0.0"
+url = "https://github.com/antruc/anima"
 license.file = "LICENSE"
 author = "Antruc"
 author_email = "admin@antruc.dev"
 
-[tool.briefcase.app.depuradordecamaratrampa]
-formal_name = "Depurador de Camara Trampa"
-description = "Filtra imagenes de camaras trampa"
-long_description = "Filtra imagenes de camaras trampa en donde se haya detectado un objeto usando Ultralytics YOLO AI"
-icon = "src/depuradordecamaratrampa/resources/icons/depuradordecamaratrampa"
+[tool.briefcase.app.anima]
+formal_name = "Anima"
+description = "Keep only the camera trap photos and videos with an animal or a person"
+long_description = """Anima sorts camera trap (trail camera, wildlife camera) photos and videos \
+offline. It detects animals and people with MegaDetector v6 and copies only the \
+files where one appears to an output folder, leaving empty triggers and false \
+positives behind. Originals are never moved or modified."""
+icon = "src/anima/resources/icons/anima"
 sources = [
-    "src/depuradordecamaratrampa",
+    "src/anima",
 ]
 test_sources = [
     "tests",
 ]
 
 requires = [
-    "ultralytics~=8.4",
-    "onnx~=1.19",
+    # Upper bounds: a new major version must be tested before it ships.
+    # Tested with numpy 2.5, onnxruntime 1.31 and opencv 5.0.
+    "numpy>=2,<3",
     "onnxruntime~=1.20",
+    "opencv-python-headless>=4.10,<6",
 ]
 test_requires = [
     "pytest",
 ]
 
-[tool.briefcase.app.depuradordecamaratrampa.macOS]
-universal_build = true
+[tool.briefcase.app.anima.linux]
 requires = [
-    "toga-cocoa~=0.5.0",
-    "std-nslog~=1.0.3",
+    "toga-gtk==0.5.7",  # Pinned: dnd.py uses the private _impl API
+    # Minimum version: needs libgirepository-2.0, see beeware/toga#3143
+    "pygobject>=3.52.1",
 ]
 
-[tool.briefcase.app.depuradordecamaratrampa.linux]
-requires = [
-    "toga-gtk~=0.5.0",
-    # PyGObject 3.52.1 enforces a requirement on libgirepository-2.0-dev. This library
-    # isn't available on Debian 12/Ubuntu 22.04. If you don't need to support those (or
-    # older) releases, you can remove this version pin. See beeware/toga#3143.
-    "pygobject>= 3.52.1",
-]
-
-[tool.briefcase.app.depuradordecamaratrampa.linux.system.debian]
+[tool.briefcase.app.anima.linux.system.debian]
 system_requires = [
-    # Needed to compile pycairo wheel
     "libcairo2-dev",
-    # One of the following two packages are needed to compile PyGObject wheel. If you
-    # remove the pygobject pin in the requires list, you should also change to the
-    # version 2.0 of the girepository library. See beeware/toga#3143.
-    # "libgirepository1.0-dev",
     "libgirepository-2.0-dev",
 ]
-
 system_runtime_requires = [
-    # Needed to provide GTK and its GI bindings
     "gir1.2-gtk-3.0",
-    # One of the following two packages are needed to use PyGObject at runtime. If you
-    # remove the pygobject pin in the requires list, you should also change to the
-    # version 2.0 of the girepository library. See beeware/toga#3143.
-    # "libgirepository-1.0-1",
     "libgirepository-2.0-0",
-    # Dependencies that GTK looks for at runtime
     "libcanberra-gtk3-module",
-    # Needed to provide WebKit2 at runtime
-    # Note: Debian 11 requires gir1.2-webkit2-4.0 instead
-    # "gir1.2-webkit2-4.1",
 ]
 
-[tool.briefcase.app.depuradordecamaratrampa.linux.system.rhel]
+[tool.briefcase.app.anima.linux.system.rhel]
 system_requires = [
-    # Needed to compile pycairo wheel
     "cairo-gobject-devel",
-    # Needed to compile PyGObject wheel
     "gobject-introspection-devel",
 ]
-
 system_runtime_requires = [
-    # Needed to support Python bindings to GTK
     "gobject-introspection",
-    # Needed to provide GTK
     "gtk3",
-    # Dependencies that GTK looks for at runtime
     "libcanberra-gtk3",
-    # Needed to provide WebKit2 at runtime
-    # "webkit2gtk3",
 ]
 
-[tool.briefcase.app.depuradordecamaratrampa.linux.system.suse]
+[tool.briefcase.app.anima.linux.system.suse]
 system_requires = [
-    # Needed to compile pycairo wheel
     "cairo-devel",
-    # Needed to compile PyGObject wheel
     "gobject-introspection-devel",
 ]
-
 system_runtime_requires = [
-    # Needed to provide GTK
     "gtk3",
-    # Needed to support Python bindings to GTK
     "gobject-introspection", "typelib(Gtk) = 3.0",
-    # Dependencies that GTK looks for at runtime
     "libcanberra-gtk3-module",
-    # Needed to provide WebKit2 at runtime
-    # "libwebkit2gtk3", "typelib(WebKit2)",
 ]
 
-[tool.briefcase.app.depuradordecamaratrampa.linux.system.arch]
+[tool.briefcase.app.anima.linux.system.arch]
 system_requires = [
-    # Needed to compile pycairo wheel
     "cairo",
-    # Needed to compile PyGObject wheel
     "gobject-introspection",
-    # Runtime dependencies that need to exist so that the
-    # Arch package passes final validation.
-    # Needed to provide GTK
     "gtk3",
-    # Dependencies that GTK looks for at runtime
     "libcanberra",
-    # Needed to provide WebKit2
-    # "webkit2gtk",
 ]
-
 system_runtime_requires = [
-    # Needed to provide GTK
     "gtk3",
-    # Needed to provide PyGObject bindings
     "gobject-introspection-runtime",
-    # Dependencies that GTK looks for at runtime
     "libcanberra",
-    # Needed to provide WebKit2 at runtime
-    # "webkit2gtk",
 ]
 
-[tool.briefcase.app.depuradordecamaratrampa.linux.appimage]
+[tool.briefcase.app.anima.linux.appimage]
 manylinux = "manylinux_2_28"
-
 system_requires = [
-    # Needed to compile pycairo wheel
     "cairo-gobject-devel",
-    # Needed to compile PyGObject wheel
     "gobject-introspection-devel",
-    # Needed to provide GTK
     "gtk3-devel",
-    # Dependencies that GTK looks for at runtime, that need to be
-    # in the build environment to be picked up by linuxdeploy
     "libcanberra-gtk3",
     "PackageKit-gtk3-module",
     "gvfs-client",
 ]
-
 linuxdeploy_plugins = [
     "DEPLOY_GTK_VERSION=3 gtk",
 ]
 
-[tool.briefcase.app.depuradordecamaratrampa.linux.flatpak]
+[tool.briefcase.app.anima.linux.flatpak]
 flatpak_runtime = "org.gnome.Platform"
 flatpak_runtime_version = "48"
 flatpak_sdk = "org.gnome.Sdk"
 
-[tool.briefcase.app.depuradordecamaratrampa.windows]
+[tool.briefcase.app.anima.windows]
 requires = [
-    "toga-winforms~=0.5.0",
+    "toga-winforms==0.5.7",  # Pinned: dnd.py uses the private _impl API
 ]
