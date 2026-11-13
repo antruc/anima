@@ -5,7 +5,7 @@ animal or a person, skip the empty triggers. Runs offline on your computer
 with MegaDetector v6**
 
 ![Windows](https://img.shields.io/badge/Windows-supported-0078D6?logo=windows&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-supported-FCC624?logo=linux&logoColor=black)
+![Linux](https://img.shields.io/badge/Linux-supported-FCC624?logo=linux&logoColor=white)
 ![Offline](https://img.shields.io/badge/detection-offline-success)
 ![MegaDetector v6](https://img.shields.io/badge/model-MegaDetector%20v6-2E7D32)
 ![ONNX Runtime](https://img.shields.io/badge/engine-ONNX%20Runtime-orange)
@@ -41,8 +41,8 @@ Use it when:
 - You want a **first pass before identifying species** by hand or with
   another tool
 
-![Anima on Linux](dct-linux.png)
-![Anima on Windows](dct-windows.png)
+![Anima on Linux](docs/anima-linux.png)
+![Anima on Windows](docs/anima-windows.png)
 
 ## Contents
 
